@@ -46,6 +46,32 @@ public class Controlador {
 		return "consulta";
 	}
 	
+	@GetMapping("/modificar/{id}")
+	public String modificar(@PathVariable int id, Model model) {
+		Libro libro = bd.getLibro(id);
+		ArrayList<Libro> libros = bd.getLibros();
+		model.addAttribute("libros", libros);
+		model.addAttribute("libro", libro);
+		model.addAttribute("usuario", this.usuario);
+		model.addAttribute("boton", "Actualiza Libro");
+		model.addAttribute("action", "/modificar");
+		return "consulta";
+	}
+	
+	@GetMapping("/modificar")
+	public String modificar2(Libro libro, Model model) {
+		bd.modifica(libro);
+		ArrayList<Libro> libros = bd.getLibros();
+		model.addAttribute("usuario", this.usuario);
+		model.addAttribute("libros", libros);
+		model.addAttribute("libro", null);
+		
+		model.addAttribute("boton", "Inserta Libro");
+		model.addAttribute("action", "/inserta");
+		return "consulta";
+	}
+	
+	
 	
 	
 	
